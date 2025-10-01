@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class camera_controller : MonoBehaviour
+{
+    public float mousespeed = 10f;
+    private Vector2 mD;
+    public Transform playerBody;
+    float xRotation = 0f;
+    void Start()
+    {
+        
+    }
+
+    
+    void Update()
+    {
+        
+        float mouseX = Input.GetAxis("Mouse X")*mousespeed*Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y")*mousespeed*Time.deltaTime;
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        playerBody.Rotate(Vector3.up * mouseX);
+    }
+}
